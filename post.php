@@ -106,18 +106,20 @@
                     $i = 1;?>
                     <h1 class="text-center" style="font-size:18"><?="ต้องการกระทู้หมายเลข {$n}"?></h1>
                         </div>
+                        <form action="post_save.php" method="post">
                         <div class="card-body">
                            <div class="b form-control-sm" style="margin-bottom:10px;">
                             แสดงความคิดเห็น :
                             </div>
                             <div class="form-group">
                                
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="35" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
+                                <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="10" cols="35" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
                             </div>
                             <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-danger rounded-pill">ส่งข้อความ</button></div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
