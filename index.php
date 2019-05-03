@@ -54,6 +54,15 @@ include 'connect.php';
             .cc a {
                 font-size: 16px;
             }
+            nav{
+/*
+background: #d8a27c; 
+background: -moz-linear-gradient(-45deg, #d8a27c 0%, #c5d0d4 39%, #d5c2bc 63%, #6fa0a5 100%); 
+background: -webkit-linear-gradient(-45deg, #d8a27c 0%,#c5d0d4 39%,#d5c2bc 63%,#6fa0a5 100%); 
+background: linear-gradient(135deg, #d8a27c 0%,#c5d0d4 39%,#d5c2bc 63%,#6fa0a5 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', endColorstr='#6fa0a5',GradientType=1 ); 
+*/
+            }
         </style>
     </head>
     <header>
@@ -124,14 +133,6 @@ include 'connect.php';
 
                             ?>     
                         </select>
-
-                        <!--
-<select name="group" class="form-control">
-<option value="aa">--ทั้งหมด--</option>
-<option value="a">เรื่องทั่วไป</option>
-<option value="b">เรื่องเรียน</option>
-</select>
--->
                     </div>
                     <?php
                     if(isset($_SESSION['username'])){  ?>
@@ -155,6 +156,7 @@ include 'connect.php';
                                 $title = $row['title'];
                                 $user_id = $row['user_id'];
                                 $post_date = $row['post_date'];
+                                $post_id = $row['id'];
                                 if($cate==1){
                                     $name_cate = "เรื่องทั่วไป";
                                 }else{
@@ -162,7 +164,7 @@ include 'connect.php';
                                 }
                                 echo "[ {$name_cate} ]&nbsp";            
                                 ?>
-                                <a href="post.php?m=<?=$n?>"><?=$title?></a><br>
+                                <a href="post.php?m=<?=$post_id?>"><?=$title?></a><br>
                                 <?php
                                     $sql_name = "select * from user where id ={$user_id}";
                                 $res_name = mysqli_query($conn,$sql_name);
@@ -193,6 +195,7 @@ include 'connect.php';
                                 $title = $row['title'];
                                 $user_id = $row['user_id'];
                                 $post_date = $row['post_date'];
+                                $post_id = $row['id'];
                                 if($cate==1){
                                     $name_cate = "เรื่องทั่วไป";
                                 }else{
@@ -200,7 +203,7 @@ include 'connect.php';
                                 }
                                 echo "[ {$name_cate} ]&nbsp";            
                                 ?>
-                                <a href="post.php?m=<?=$n?>"><?=$title?></a><br>
+                                <a href="post.php?m=<?=$post_id?>"><?=$title?></a><br>
                                 <?php
                                     $sql_name = "select * from user where id ={$user_id}";
                                 $res_name = mysqli_query($conn,$sql_name);
