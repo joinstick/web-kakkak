@@ -1,11 +1,11 @@
 <?php
-   session_start();
+session_start();
+include 'connect.php';
 ?> 
-   <html>
+<html>
     <head>
         <meta charset="utf-8"/>
         <title>กระทู้จ้า</title>
-        <!--        <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">-->
         <script src="js/jquery-3.3.1.min.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -14,19 +14,19 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
         <style>
-              header{
+            header{
                 /*          border: 1px solid black;*/
                 text-align: center;
                 /*                font-family: 'Charmonman', cursive;*/
-/*               font-family: 'Bungee Shade', cursive;*/
+                /*               font-family: 'Bungee Shade', cursive;*/
                 font-family: 'Montserrat Subrayada', sans-serif;
                 padding-top: 10px;
                 font-size: 34px;
-               
-                 background-color: rgba(0,0,0,0.07);
+
+                background-color: rgba(0,0,0,0.07);
             }
             .b{
-                background-color: rgba(0,0,0,0.07);
+                background-color: rgba(0,0,0,0.2);
             }
             body{
                 /*                background-color:#5c85d6;*/
@@ -49,13 +49,13 @@
     </head>
     <header>
         <p style="margin:5px;">Webboard KakKak</p>
-                 
+
         <hr>
     </header>
     <body>
 
         <div class="cc container">
-                <div class="navb container">
+            <div class="navb container">
                 <div class="navb row">
                     <nav class="navbar navbar-expand navbar-light bg-light form-control" >
                         <a class="navbar-brand" href="index.php">
@@ -96,29 +96,54 @@
                     </nav>
                 </div>
             </div>
-            
+
             <div class="one-row row">
-                <div class="col-10 col-sm-8 col-md-4 offset-1 offset-sm-2 offset-md-4">
-                    <div class="card text-left" style="background-color: rgba(0,0,0,0.1);">
-                        <div class="card-header">
-                         <?php
+                <div class="col-6 col-sm-6 col-md-6">
+                    <?php
                     $n = $_GET['m'];
-                    $i = 1;?>
-                    <h1 class="text-center" style="font-size:18"><?="ต้องการกระทู้หมายเลข {$n}"?></h1>
-                        </div>
+                    $sql = "select * from post join user on post.user_id=user.id where post.id = {$n}";
+                    $result = mysqli_query($conn,$sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $post_date = $row['post_date'];
+                        $username = $row['login'];
+                    }
+                    ?>
+                    <div class="card text-left" style="margin:10px;width:500px;height:auto;">
+                        <h5 class="card-header"><?=$title?></h5>
                         <div class="card-body">
-                           <div class="b form-control-sm" style="margin-bottom:10px;">
-                            แสดงความคิดเห็น :
-                            </div>
-                            <div class="form-group">
-                               
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="35" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
-                            </div>
-                            <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-outline-danger rounded-pill">ส่งข้อความ</button></div>
+                            <p class="card-text"><?=$content?></p><br>
+                            <p class="card-text"><?=$username.'&nbsp&nbsp-&nbsp&nbsp'.$post_date?></p>
                         </div>
                     </div>
+                    <!--                <div class="col-10 col-sm-8 col-md-4 offset-1 offset-sm-2 offset-md-4">-->
+
+                    <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin:10px;width:500px;height:260;">
+                        <!--
+<div class="card-header">
+<?php
+    $n = $_GET['m'];
+                            $i = 1;?>
+<h1 class="text-center" style="font-size:18"><?="ต้องการกระทู้หมายเลข {$n}"?></h1>
+</div>
+-->
+                        <form action="post_save.php?id=<?=$n?>" method="post">
+                            <div class="card-body">
+                                <div class="b form-control-sm" style="margin-bottom:10px;color:#fff;">
+                                    แสดงความคิดเห็น :
+                                </div>
+                                <div class="form-group">
+
+                                    <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
+                                </div>
+                                <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-outline-danger rounded-pill">ส่งข้อความ</button></div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--                </div>-->
                 </div>
             </div>
         </div>
