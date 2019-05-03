@@ -149,11 +149,11 @@ if(isset($_SESSION['id'])){
                                     <form>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Login :</label>
-                                            <input type="text" class="form-control" style="background-color: rgba(0,0,0,0.07);color:#fff;" name="login" placeholder="Enter Username">
+                                            <input type="text" class="form-control" style="background-color: rgba(0,0,0,0.07);color:#fff;" name="login" placeholder="Enter Username" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Password :</label>
-                                            <input type="password" class="form-control" style="background-color: rgba(0,0,0,0.07);color:#fff;" name="pass" placeholder="Enter Password">
+                                            <input type="password" class="form-control" style="background-color: rgba(0,0,0,0.07);color:#fff;" name="pass" placeholder="Enter Password" required>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-outline-danger rounded-pill">Login</button>

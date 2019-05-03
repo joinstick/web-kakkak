@@ -128,7 +128,7 @@ include 'connect.php';
                         </div>
                         
                                                    <?php
-                            $sql = "select * from comment join user on comment.user_id=user.id where comment.post_id = {$n}";
+                            $sql = "select * from comment join user on comment.user_id=user.id where comment.post_id = {$n} order by post_date asc";
                                         $res = mysqli_query($conn,$sql);
                                         $i=1;
                                         while($row = mysqli_fetch_assoc($res)){
@@ -163,10 +163,10 @@ include 'connect.php';
                                         <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
                                     </div>
                                     <div class="text-center">
-                               <?php         if(isset($_SESSION['username'])){  ?>
-                                           <button type="submit" class="btn btn-outline-danger rounded-pill" onclick="func1();">ส่งข้อความ</button>
-                              <?php          }else{ ?>
+                               <?php         if(!isset($_SESSION['username'])){  ?>
                                            <button type="submit" class="btn btn-outline-danger rounded-pill" onclick="func2();">ส่งข้อความ</button>
+                              <?php          }else{ ?>
+                                           <button type="submit" class="btn btn-outline-danger rounded-pill" onsubmit="func1();">ส่งข้อความ</button>
                                     </div>
                             <?php } ?>
                                  
