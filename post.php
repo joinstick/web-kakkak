@@ -46,6 +46,16 @@ include 'connect.php';
                 font-size: 16px;
             }
         </style>
+
+        <script>
+            function func1(){
+                 alert('เพิ่มความคิดเห็นเรียบร้อย');
+            }
+            function func2(){
+                 alert('กรุณา login ก่อนแสดงความคิดเห็น');
+            }
+        </script>
+
     </head>
     <header>
         <p style="margin:5px;">Webboard KakKak</p>
@@ -55,7 +65,6 @@ include 'connect.php';
     <body>
 
         <div class="cc container">
-            <div class="navb container">
                 <div class="navb row">
                     <nav class="navbar navbar-expand navbar-light bg-light form-control" >
                         <a class="navbar-brand" href="index.php">
@@ -63,7 +72,7 @@ include 'connect.php';
                         </a> 
                         <a class="navbar-brand" href="login.php">
                             <?php
-                            if(!isset($_SESSION['id'])){ ?>
+                                        if(!isset($_SESSION['id'])){ ?>
                             <div class="collapse navbar-collapse nav justify-content-end">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
@@ -75,7 +84,7 @@ include 'connect.php';
                                 </ul>
                             </div>
                             <?php }
-                            else{ ?>
+                                        else{ ?>
                             <!--                    <ul class="nav justify-content-end"> เอาไปไว้ท้ายสุดของ Navs--> 
                             <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
@@ -96,76 +105,82 @@ include 'connect.php';
                     </nav>
                 </div>
             </div>
-
-            <div class="one-row row">
-                <div class="col-6 col-sm-6 col-md-6">
-                    <?php
-                    $n = $_GET['m'];
-<<<<<<< HEAD
-                    $i = 1;?>
-                    <h1 class="text-center" style="font-size:18"><?="ต้องการกระทู้หมายเลข {$n}"?></h1>
-                        </div>
-                        <form action="post_save.php" method="post">
-                        <div class="card-body">
-                           <div class="b form-control-sm" style="margin-bottom:10px;">
-                            แสดงความคิดเห็น :
-                            </div>
-                            <div class="form-group">
-                               
-                                <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="10" cols="35" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
-                            </div>
-                            <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-outline-danger rounded-pill">ส่งข้อความ</button></div>
-=======
-                    $sql = "select * from post join user on post.user_id=user.id where post.id = {$n}";
-                    $result = mysqli_query($conn,$sql);
-                    while($row = mysqli_fetch_assoc($result)){
-                        $title = $row['title'];
-                        $content = $row['content'];
-                        $post_date = $row['post_date'];
-                        $username = $row['login'];
-                    }
-                    ?>
-                    <div class="card text-left" style="margin:10px;width:500px;height:auto;">
-                        <h5 class="card-header"><?=$title?></h5>
-                        <div class="card-body">
-                            <p class="card-text"><?=$content?></p><br>
-                            <p class="card-text"><?=$username.'&nbsp&nbsp-&nbsp&nbsp'.$post_date?></p>
->>>>>>> update1
-                        </div>
-                        </form>
-                    </div>
-                    <!--                <div class="col-10 col-sm-8 col-md-4 offset-1 offset-sm-2 offset-md-4">-->
-
-                    <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin:10px;width:500px;height:260;">
-                        <!--
-<div class="card-header">
-<?php
-    $n = $_GET['m'];
-                            $i = 1;?>
-<h1 class="text-center" style="font-size:18"><?="ต้องการกระทู้หมายเลข {$n}"?></h1>
-</div>
--->
-                        <form action="post_save.php?id=<?=$n?>" method="post">
+            <div class="container">
+                <div class="row">
+                        <?php
+                                        $n = $_GET['m'];
+                                        $sql = "select * from post join user on post.user_id=user.id where post.id = {$n}";
+                                        $result = mysqli_query($conn,$sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            $title = $row['title'];
+                                            $content = $row['content'];
+                                            $post_date = $row['post_date'];
+                                            $username = $row['login'];
+                                        }
+                        ?>
+                        <div class="col-md-7">
+                        <div class="card text-left" style="margin:10px;">
+                            <h5 class="card-header"><?=$title?></h5>
                             <div class="card-body">
-                                <div class="b form-control-sm" style="margin-bottom:10px;color:#fff;">
-                                    แสดงความคิดเห็น :
-                                </div>
-                                <div class="form-group">
-
-                                    <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
-                                </div>
-                                <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-outline-danger rounded-pill">ส่งข้อความ</button></div>
+                                <p class="card-text"><?=$content?></p><br>
+                                <p class="card-text"><?=$username.'&nbsp&nbsp-&nbsp&nbsp'.$post_date?></p>
                             </div>
-                        </form>
+                        </div>
+                        
+                                                   <?php
+                            $sql = "select * from comment join user on comment.user_id=user.id where comment.post_id = {$n}";
+                                        $res = mysqli_query($conn,$sql);
+                                        $i=1;
+                                        while($row = mysqli_fetch_assoc($res)){
+                                            $content = $row['content'];
+                                            $post_date = $row['post_date'];
+                                            $username = $row['login']; 
+                        ?>
+
+                        <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin-top:10px;margin-bottom:10px;margin-left:60px;margin-right:10px;">
+                            <h5 class="card-header">ความคิดเห็นที่ <?=$i?></h5>
+                            <div class="card-body">
+                                <p class="card-text"><?=$content?></p><br>
+                                <p class="card-text"><?=$username.'&nbsp&nbsp-&nbsp&nbsp'.$post_date?></p>
+                            </div>
+                        </div>
+
+                        <?php   $i++;     }
+                        ?>
+                        
                     </div>
-                    <!--                </div>-->
+                    <div class="col-md-5">
+                            
+                       
+                              <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin:10px;height:260;">
+                            <form action="post_save.php?id=<?=$n?>" method="post">
+                                <div class="card-body">
+                                    <div class="b form-control-sm" style="margin-bottom:10px;color:#fff;">
+                                        แสดงความคิดเห็น :
+                                    </div>
+                                    <div class="form-group">
+
+                                        <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
+                                    </div>
+                                    <div class="text-center">
+                               <?php         if(isset($_SESSION['username'])){  ?>
+                                           <button type="submit" class="btn btn-outline-danger rounded-pill" onclick="func1();">ส่งข้อความ</button>
+                              <?php          }else{ ?>
+                                           <button type="submit" class="btn btn-outline-danger rounded-pill" onclick="func2();">ส่งข้อความ</button>
+                                    </div>
+                            <?php } ?>
+                                 
+                                               
+                                </div>
+                            </form>
+                        </div>
+                          
+                    </div>
                 </div>
+                
             </div>
-        </div>
+            
+        
         <br>
     </body>
 </html>
