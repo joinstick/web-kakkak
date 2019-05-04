@@ -14,6 +14,13 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $_SESSION['role']="m";
     $role = $_SESSION['role'];
+    $repeat_user = "select * from user where login = '{$login}'";
+    $res_user = mysqli_query($conn,$repeat_user);
+    $num = mysqli_num_rows($res_user);
+    if($num==1){
+        $_SESSION['error'] = 1;
+        header('location:register.php');
+    }else{
     $sql = "insert into user(login,password,name,gender,email,role) ";
     $sql .= "values ('$login','$password','$name','$gender','$email','$role')";
     $result = mysqli_query($conn,$sql);
@@ -23,6 +30,8 @@ if(isset($_POST['submit'])){
     }else{
         $_SESSION['error'] = 1;
         header('location:register.php');
+    }
+        
     }
 }
 ?>

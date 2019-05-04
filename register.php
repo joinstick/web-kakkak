@@ -136,6 +136,8 @@ if(isset($_SESSION['id'])){
                         ?>
                    </div>
           <?php     }
+              
+                  unset($_SESSION['error']);
                  }
             ?>
             <div class="row">

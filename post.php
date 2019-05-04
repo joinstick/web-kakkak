@@ -159,7 +159,7 @@ include 'connect.php';
                                         แสดงความคิดเห็น :
                                     </div>
                                     <div class="form-group">
-
+                                        
                                         <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
                                     </div>
                                     <div class="text-center">

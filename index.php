@@ -64,6 +64,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
 */
             }
         </style>
+          <?php
+              if(isset($_POST['group']) and ($_POST['group']>0 and $_POST['group']<3)){
+                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id where category.id = {$_POST['group']} order by post_date desc";
+              }else{
+                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id order by post_date desc";
+              }
+           $result_cate = mysqli_query($conn,$sql_cate);
+          ?>
     </head>
     <header>
                     <p style="margin:5px;">Webboard KakKak</p>
@@ -119,11 +127,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                     <div class="col-7 form-inline">
                         หมวดหมู่ : <?php echo "&nbsp"; 
 
-                        $query = "select * from category ";
+                        $query = "select * from category order by id desc";
                         $result = mysqli_query($conn,$query); ?>
-                        <select name="group" class="form-control" style="background-color: rgba(0,0,0,0.07);">
-                            <?php       
-                            echo "<option value='0'>--ทั้งหมด--</option>";
+                        <form action="index.php" method="post" name="select_cate">
+                        <select name="group" class="form-control" style="background-color: rgba(0,0,0,0.07);" onchange="document.select_cate.submit();">
+                            <?php 
+                            echo "<option value ='0'>--เลือกหมวดหมู่--</option>";
                             while($row = mysqli_fetch_assoc($result)){
                                 $id_cate = $row['id'];
                                 $name_cate = $row['name'];
@@ -133,6 +142,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
 
                             ?>     
                         </select>
+                        </form>
                     </div>
                     <?php
                     if(isset($_SESSION['username'])){  ?>
@@ -145,10 +155,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                     <tbody>
                         <?php
                         if(isset($_SESSION['role']) && $_SESSION['role']=="a"){      //admin
-                            $sql = "select * from post order by post_date desc ";
-                            $res = mysqli_query($conn,$sql);
+//                            $sql = "select * from post order by post_date desc ";
+//                            $res = mysqli_query($conn,$sql);
                             $n=1;
-                            while($row = mysqli_fetch_assoc($res)){ ?>
+                            while($row = mysqli_fetch_assoc($result_cate)){ ?>
                         <tr>
                             <th scope="row">
                                 <?php
@@ -156,7 +166,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                                 $title = $row['title'];
                                 $user_id = $row['user_id'];
                                 $post_date = $row['post_date'];
-                                $post_id = $row['id'];
+                                
+                                     $post_id = $row['pid'];
+                            
+                               
                                 if($cate==1){
                                     $name_cate = "เรื่องทั่วไป";
                                 }else{
@@ -184,10 +197,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                             }
                         } 
                         else{                                                        //others
-                            $sql = "select * from post order by post_date desc ";
-                            $res = mysqli_query($conn,$sql);
+//                            $sql = "select * from post order by post_date desc ";
+//                            $res = mysqli_query($conn,$sql);
                             $n=1;
-                            while($row = mysqli_fetch_assoc($res)){ ?>
+                            while($row = mysqli_fetch_assoc($result_cate)){ ?>
                         <tr>
                             <th scope="row">
                                <?php
@@ -195,7 +208,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                                 $title = $row['title'];
                                 $user_id = $row['user_id'];
                                 $post_date = $row['post_date'];
-                                $post_id = $row['id'];
+                                
+                                     $post_id = $row['pid'];
+        
                                 if($cate==1){
                                     $name_cate = "เรื่องทั่วไป";
                                 }else{
