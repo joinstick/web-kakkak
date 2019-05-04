@@ -47,7 +47,7 @@ include 'connect.php';
             }
         </style>
 
-        <script>
+        <script type="text/javascript">
             function func1(){
                  alert('เพิ่มความคิดเห็นเรียบร้อย');
             }

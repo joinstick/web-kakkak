@@ -72,6 +72,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
               }
            $result_cate = mysqli_query($conn,$sql_cate);
           ?>
+          <script type="text/javascript">
+               function getconfirm(){
+                   var reval = confirm("ต้องการจะลบจริงหรือไม่?");
+                   if(reval==true){
+                       return true;
+                   }else{
+                       return false;
+                   }
+               }
+          </script>
     </head>
     <header>
                     <p style="margin:5px;">Webboard KakKak</p>
@@ -157,7 +167,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                         if(isset($_SESSION['role']) && $_SESSION['role']=="a"){      //admin
 //                            $sql = "select * from post order by post_date desc ";
 //                            $res = mysqli_query($conn,$sql);
-                            $n=1;
+                            
                             while($row = mysqli_fetch_assoc($result_cate)){ ?>
                         <tr>
                             <th scope="row">
@@ -169,7 +179,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                                 
                                      $post_id = $row['pid'];
                             
-                               
                                 if($cate==1){
                                     $name_cate = "เรื่องทั่วไป";
                                 }else{
@@ -191,9 +200,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                             </th>
                             <td></td>
                             <td></td>
-                            <td><a class="btn btn-danger rounded-pill" href="delete.php?p=<?=$n?>" role="button"><i class="fas fa-trash-alt"></i></a></td>
+                            <td><a class="btn btn-danger rounded-pill" href="delete.php?p=<?=$post_id?>" role="button" onclick="return getconfirm();"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
-                        <?php        $n++;
+                        <?php        
                             }
                         } 
                         else{                                                        //others
