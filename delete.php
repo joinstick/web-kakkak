@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'connect.php';
 if(!isset($_SESSION['id'])||$_SESSION['role']=='m'){   //ดักให้ไม่สามารถเข้ามาหน้านี้ได้ ถ้ายังไม่ login
     header("location:index.php");
     die();
@@ -41,19 +40,12 @@ if(!isset($_SESSION['id'])||$_SESSION['role']=='m'){   //ดักให้ไ�
     </header>
     <body>
         <?php
-        if(isset($_SESSION['role'])=='a'){
+        if(isset($_SESSION['id'])){
             $p = $_GET['p'];
-            $del_post = "delete from post where id = {$p}";
-            $del_p = mysqli_query($conn,$del_post);
-            $del_comment = "delete from comment where post_id = {$p}";
-            $del_c = mysqli_query($conn,$del_comment);
-            header('location:index.php');
-//            echo " ลบกระทู้ที่ {$p} เรียบร้อยแล้วจ้าาาา <br>";
-//            header("refresh:3; url=index.php");
-//           exit(0);
+            echo " ลบกระทู้ที่ {$p} เรียบร้อยแล้วจ้าาาา <br>";
         }
         else{
-            echo "คุณไม่ได้รับสิทธิ์เข้าถึงการจัดการข้อมูล<br>";
+            echo "คุณยังไม่ได้เข้าสู่ระบบ<br>";
         }
         ?>
         <a href="index.php">กลับสู่หน้าหลัก</a>
