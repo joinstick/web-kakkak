@@ -47,7 +47,7 @@ include 'connect.php';
             }
         </style>
 
-        <script>
+        <script type="text/javascript">
             function func1(){
                  alert('เพิ่มความคิดเห็นเรียบร้อย');
             }
@@ -152,16 +152,17 @@ include 'connect.php';
                     <div class="col-md-5">
                             
                        
-                              <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin:10px;height:260;">
+                              <div class="card text-left" style="background-color: rgba(0,0,0,0.1);margin:10px;">
                             <form action="post_save.php?id=<?=$n?>" method="post">
                                 <div class="card-body">
                                     <div class="b form-control-sm" style="margin-bottom:10px;color:#fff;">
                                         แสดงความคิดเห็น :
                                     </div>
                                     <div class="form-group">
-
-                                        <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="5" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
+                                        
+                                        <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="6" cols="20" style="background-color: rgba(0,0,0,0.07);color:#fff;" required></textarea>
                                     </div>
+                                    
                                     <div class="text-center">
                                <?php         if(!isset($_SESSION['username'])){  ?>
                                            <button type="submit" class="btn btn-outline-danger rounded-pill" onclick="func2();">ส่งข้อความ</button>

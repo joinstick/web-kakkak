@@ -114,7 +114,7 @@ session_start();
 
             <div class="one-container container">
                 <div class="one-row row">
-                    <div class="col-10 col-sm-8 col-md-4 offset-1 offset-sm-2 offset-md-4">
+                    <div class="col-10 col-sm-8 col-md-6 offset-1 offset-sm-2 offset-md-3">
                         <div class="card text-left" style="background-color: rgba(0,0,0,0.1);">
                             <div class="card-header">
                                 <?php
@@ -128,6 +128,8 @@ session_start();
                             </div>
                             <div class="card-body">
                                <form action="newpost_save.php" method="post">
+                               <div class="row">
+                                <div class="col-6 col-sm-6 col-md-5">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">หมวดหมู่ : </label>
                                     <select class="form-control" name="cate" style="background-color: rgba(0,0,0,0.1);">
@@ -135,6 +137,8 @@ session_start();
                                         <option value="1" selected>เรื่องทั่วไป</option>
                                         <option value="2">เรื่องเรียน</option>
                                     </select>
+                                  </div>  
+                                </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">หัวข้อ : </label>
@@ -142,7 +146,7 @@ session_start();
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">เนื้อหา : </label>
-                                    <textarea class="form-control" style="background-color: rgba(0,0,0,0.1);color:#fff;" id="exampleFormControlTextarea1" rows="3" name="content" required></textarea>
+                                    <textarea class="form-control" style="background-color: rgba(0,0,0,0.1);color:#fff;" id="exampleFormControlTextarea1" rows="8" name="content" required></textarea>
                                 </div>
                                 <!--                            <a href="#" class="btn btn-primary">Go somewhere</a>-->
                                 <div class="text-center">
