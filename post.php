@@ -45,6 +45,9 @@ include 'connect.php';
             .cc a {
                 font-size: 16px;
             }
+                .nav-item a img{
+                margin-bottom: 10px;
+            }
         </style>
 
         <script type="text/javascript">
@@ -65,6 +68,7 @@ include 'connect.php';
     <body>
 
         <div class="cc container">
+                <div class="navb container">
                 <div class="navb row">
                     <nav class="navbar navbar-expand navbar-light bg-light form-control" >
                         <a class="navbar-brand" href="index.php">
@@ -72,7 +76,7 @@ include 'connect.php';
                         </a> 
                         <a class="navbar-brand" href="login.php">
                             <?php
-                                        if(!isset($_SESSION['id'])){ ?>
+                            if(!isset($_SESSION['id'])){ ?>
                             <div class="collapse navbar-collapse nav justify-content-end">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
@@ -84,16 +88,26 @@ include 'connect.php';
                                 </ul>
                             </div>
                             <?php }
-                                        else{ ?>
+                            else{ ?>
                             <!--                    <ul class="nav justify-content-end"> เอาไปไว้ท้ายสุดของ Navs--> 
+                                <?php
+                                                $sql = "select avatar from user where login = '{$_SESSION['username']}'";
+                                                $query = mysqli_query($conn,$sql);
+                                                while($row = mysqli_fetch_assoc($query)){
+                                                    $avatar = $row['avatar'];
+                                                }
+                                              ?>
                             <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
                                     <a class="navbar-brand" >
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-user-astronaut"></i><?php echo " {$_SESSION['username']}"; ?>
+                                                <img src="<?=$avatar?>" style="width:30px;height:30px;border-radius:50%;"><?php echo " {$_SESSION['username']}"; ?>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--                                              <i class="fas fa-user-astronaut"></i>-->
+                                               <a class="dropdown-item" href="profile.php"><i class="fas fa-cogs"></i> การตั้งค่า</a>
+                                               <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-door-open"></i> ออกจากระบบ</a>
                                             </div>
                                         </li>
@@ -104,6 +118,7 @@ include 'connect.php';
                         </a>
                     </nav>
                 </div>
+            </div>
             </div>
             <div class="container">
                 <div class="row">

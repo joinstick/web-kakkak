@@ -144,22 +144,22 @@ if(isset($_SESSION['id'])){
                 <!--                <div class="col-4"></div>-->
                 <div class="col-10 col-sm-8 col-md-4 offset-1 offset-sm-2 offset-md-4">     
                    
-                    <div class="card" style="height:540px;width:auto;background-color: rgba(0,0,0,0.1);">
+                    <div class="card" style="height:600px;width:auto;background-color: rgba(0,0,0,0.1);">
                         <div class="card-header">
                             สมัครสมาชิก
                         </div>
                         <div class="card-body">
-                            <form method="post" action="register_save.php">
+                            <form method="post" action="register_save.php" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">ชื่อบัญชี :</label>
+                                    <label for="login">ชื่อบัญชี :</label>
                                     <input type="text" class="form-control" name="login" placeholder="Enter Username" style="background-color: rgba(0,0,0,0.07);color:#fff;" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">รหัสผ่าน :</label>
+                                    <label for="password">รหัสผ่าน :</label>
                                     <input type="password" class="form-control" name="password" placeholder="Enter Password" style="background-color: rgba(0,0,0,0.07);color:#fff;" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">ชื่อ-นามสกุล :</label>
+                                    <label for="name">ชื่อ-นามสกุล :</label>
                                     <input type="text" class="form-control" name="name"  style="background-color: rgba(0,0,0,0.07);color:#fff;" required>
                                 </div>
 
@@ -170,24 +170,28 @@ if(isset($_SESSION['id'])){
                                         </div>
                                         <div class="sub-col col-6">
                                             <div class="form-check" >
-                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="female" style="background-color: rgba(0,0,0,0.07);color:#fff;" checked>
-                                                <label class="form-check-label" for="inlineRadio1">หญิง</label>
+                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="f" style="background-color: rgba(0,0,0,0.07);color:#fff;" checked>
+                                                <label class="form-check-label" for="gender">หญิง</label>
                                             </div>
                                             <div class="form-check" >
-                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="male" style="background-color: rgba(0,0,0,0.07);color:#fff;"> 
-                                                <label class="form-check-label" for="inlineRadio2">ชาย</label>
+                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="m" style="background-color: rgba(0,0,0,0.07);color:#fff;"> 
+                                                <label class="form-check-label" for="gender">ชาย</label>
                                             </div>
                                             <div class="form-check" >
-                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="other" style="background-color: rgba(0,0,0,0.07);color:#fff;">
-                                                <label class="form-check-label" for="inlineRadio2">อื่นๆ</label>
+                                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="o" style="background-color: rgba(0,0,0,0.07);color:#fff;">
+                                                <label class="form-check-label" for="gender">อื่นๆ</label>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="inputEmail4">อีเมลล์</label>
+                                    <label for="email">อีเมลล์</label>
                                     <input type="email" class="form-control" id="inputEmail4" name="email" style="background-color: rgba(0,0,0,0.07);color:#fff;" required>
+                                </div>
+                                <div class="form-group">
+<!--                                    <label for="avatar">Profile Image</label>-->
+                                    เลือกรูปโปรไฟล์ : <input type="file" name="avatar" accept="image/*" id="avatar">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-outline-danger rounded-pill" name="submit">Submit</button></div>

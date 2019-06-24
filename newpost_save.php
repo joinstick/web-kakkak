@@ -26,5 +26,7 @@ if(isset($_POST['submit'])){
     }else{
         echo "<br>ไม่สามารถเพิ่มข้อมูลได้<br>";
     }
+}else{
+    header('location:index.php');
 }
 ?>

@@ -1,44 +1,36 @@
 <?php
 session_start();
 include 'connect.php';
+ if(isset($_SESSION['success'])){?>
+     <script>
+     window.alert("การแก้ไขข้อมูลสำเร็จ :)");</script>
+ <?php   unset($_SESSION['success']);
+ }
 ?>
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>หน้าแรกของฉัน</title>
-        <!--
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
--->     
+        <title>หน้าแรกของฉัน</title>  
         <script src="js/jquery-3.3.1.min.js"></script>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <!--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Vast+Shadow" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <style>
             header{
                 text-align: center;  
                 font-family: 'Montserrat Subrayada', sans-serif;
-/*                font-family: 'Vast Shadow', cursive;*/
-/*                font-family: 'Bungee Shade', cursive;*/
                 padding-top: 10px;
-                font-size: 34px;
-                
+                font-size: 34px;                
                 background-color: rgba(0,0,0,0.07);
             }
             body{
               
                 background-image: url(../wb_5921600172/img/bg6.jpg);
-                background-size: cover;
-                
+                background-size: cover;  
             }
-
             header .logo{
                 max-width: 120px;
                 height:auto;
@@ -54,24 +46,10 @@ include 'connect.php';
             .cc a {
                 font-size: 16px;
             }
-            nav{
-/*
-background: #d8a27c; 
-background: -moz-linear-gradient(-45deg, #d8a27c 0%, #c5d0d4 39%, #d5c2bc 63%, #6fa0a5 100%); 
-background: -webkit-linear-gradient(-45deg, #d8a27c 0%,#c5d0d4 39%,#d5c2bc 63%,#6fa0a5 100%); 
-background: linear-gradient(135deg, #d8a27c 0%,#c5d0d4 39%,#d5c2bc 63%,#6fa0a5 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', endColorstr='#6fa0a5',GradientType=1 ); 
-*/
+            .nav-item a img{
+                margin-bottom: 10px;
             }
         </style>
-          <?php
-              if(isset($_POST['group']) and ($_POST['group']>0 and $_POST['group']<3)){
-                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id where category.id = {$_POST['group']} order by post_date desc";
-              }else{
-                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id order by post_date desc";
-              }
-           $result_cate = mysqli_query($conn,$sql_cate);
-          ?>
           <script type="text/javascript">
                function getconfirm(){
                    var reval = confirm("ต้องการจะลบจริงหรือไม่?");
@@ -81,14 +59,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                        return false;
                    }
                }
+              function changeCate(cat){
+                window.location.href = "index.php?cat="+cat;
+            }
           </script>
+                    <?php
+              if(isset($_GET['cat']) and ($_GET['cat']>0 and $_GET['cat']<3)){
+                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id where category.id = {$_GET['cat']} order by post_date desc";
+              }else{
+                  $sql_cate = "select post.id as pid,title,post_date,cat_id,user_id from post join category on post.cat_id=category.id order by post_date desc";
+              }
+           $result_cate = mysqli_query($conn,$sql_cate);
+          ?>
     </head>
     <header>
                     <p style="margin:5px;">Webboard KakKak</p>
         <hr>
     </header>
     <body>
-        <!-- Image and text -->
         <div class="cc container">
             <div class="navb container">
                 <div class="navb row">
@@ -112,14 +100,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                             <?php }
                             else{ ?>
                             <!--                    <ul class="nav justify-content-end"> เอาไปไว้ท้ายสุดของ Navs--> 
+                                <?php
+                                                $sql = "select avatar from user where login = '{$_SESSION['username']}'";
+                                                $query = mysqli_query($conn,$sql);
+                                                while($row = mysqli_fetch_assoc($query)){
+                                                    $avatar = $row['avatar'];
+                                                }
+                                              ?>
                             <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavDropdown">
                                 <ul class="navbar-nav">
                                     <a class="navbar-brand" >
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-user-astronaut"></i><?php echo " {$_SESSION['username']}"; ?>
+                                                <img src="<?=$avatar?>" style="width:30px;height:30px;border-radius:50%;"><?php echo " {$_SESSION['username']}"; ?>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--                                              <i class="fas fa-user-astronaut"></i>-->
+                                               <a class="dropdown-item" href="profile.php"><i class="fas fa-cogs"></i> การตั้งค่า</a>
+                                               <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-door-open"></i> ออกจากระบบ</a>
                                             </div>
                                         </li>
@@ -131,7 +129,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                     </nav>
                 </div>
             </div>
-
             <div class="one-container container">
                 <div class="one-row row">
                     <div class="col-7 form-inline">
@@ -139,20 +136,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
 
                         $query = "select * from category order by id desc";
                         $result = mysqli_query($conn,$query); ?>
-                        <form action="index.php" method="post" name="select_cate">
-                        <select name="group" class="form-control" style="background-color: rgba(0,0,0,0.07);" onchange="document.select_cate.submit();">
-                            <?php 
-                            echo "<option value ='0'>--เลือกหมวดหมู่--</option>";
-                            while($row = mysqli_fetch_assoc($result)){
+                        <select type="option" name="group" class="form-control" style="background-color: rgba(0,0,0,0.07);" onchange="changeCate(this.value);">
+                            <option value ="0">--เลือกหมวดหมู่--</option>
+                       <?php     while($row = mysqli_fetch_assoc($result)){
                                 $id_cate = $row['id'];
                                 $name_cate = $row['name'];
-
-                                echo "<option value='{$id_cate}'>{$name_cate}</option>";
-                            }
-
+                            ?>
+                                <option value="<?=$id_cate?>"><?=$name_cate?></option>
+                <?php            }
                             ?>     
                         </select>
-                        </form>
                     </div>
                     <?php
                     if(isset($_SESSION['username'])){  ?>
@@ -164,10 +157,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                 <table class="table table-striped tt">
                     <tbody>
                         <?php
-                        if(isset($_SESSION['role']) && $_SESSION['role']=="a"){      //admin
-//                            $sql = "select * from post order by post_date desc ";
-//                            $res = mysqli_query($conn,$sql);
-                            
+                        if(isset($_SESSION['role']) && $_SESSION['role']=="a"){      //admin                         
                             while($row = mysqli_fetch_assoc($result_cate)){ ?>
                         <tr>
                             <th scope="row">
@@ -249,5 +239,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8a27c', end
                 </table>
             </div>
         </div>
-    </body>
+    </body>   
 </html>

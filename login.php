@@ -15,20 +15,20 @@ if(isset($_SESSION['id'])){
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<!--        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">-->
-       <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+        <!--        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
         <title>หน้าLogin</title>
         <style>
             header{
                 /*          border: 1px solid black;*/
                 text-align: center;
                 /*                font-family: 'Charmonman', cursive;*/
-/*               font-family: 'Bungee Shade', cursive;*/
+                /*               font-family: 'Bungee Shade', cursive;*/
                 font-family: 'Montserrat Subrayada', sans-serif;
                 padding-top: 10px;
                 font-size: 34px;
-               
-                 background-color: rgba(0,0,0,0.07);
+
+                background-color: rgba(0,0,0,0.07);
             }
             .b{
                 background-color: #6CD2FE;  
@@ -37,13 +37,13 @@ if(isset($_SESSION['id'])){
                 width: 250px;
                 border: 2px solid black;
                 padding: 10px;
-               
+
                 margin-left: 40%;
                 background-color:#d9b3ff;
             }
             body{
-              background-image: url(../wb_5921600172/img/bg6.jpg);
-              background-size: cover;
+                background-image: url(../wb_5921600172/img/bg6.jpg);
+                background-size: cover;
             }
             .cc a {
                 font-size: 16px;
@@ -64,16 +64,27 @@ if(isset($_SESSION['id'])){
             nav{
                 background-color: rgba(0,0,0,0,0.07);
             }
+            footer{
+                font-family: 'Waiting for the Sunrise';
+                background-color: rgba(0,0,0,0.15);
+                color: #fff;
+                margin-top: 40px;
+                margin-left: 0px;
+                padding-top: 20px;
+                padding-bottom: 5px;
+                font-size: 15px;
+                text-align: center;
+            }
         </style>
     </head>
     <header>
         <p style="margin:5px;">Webboard KakKak</p>
-                 
+
         <hr>
     </header>
 
     <body>
-        <form method="post" action="verify.php?check=1">
+        <form method="post" action="verify.php">
             <div class="cc container">
                 <div class="navb container">
                     <div class="navb row">
@@ -156,7 +167,7 @@ if(isset($_SESSION['id'])){
                                             <input type="password" class="form-control" style="background-color: rgba(0,0,0,0.07);color:#fff;" name="pass" placeholder="Enter Password" required>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-outline-danger rounded-pill">Login</button>
+                                            <button type="submit" class="btn btn-outline-danger rounded-pill" name="submit">Login</button>
                                         </div>
                                     </form>
                                 </div>
@@ -171,5 +182,10 @@ if(isset($_SESSION['id'])){
                 </div>
             </div>
         </form>
+       <footer>
+           <link href='https://fonts.googleapis.com/css?family=Waiting for the Sunrise' rel='stylesheet'>
+            <p>Copyright &copy; Webboard Kakkak by กัญญาวีร์ ศรีคงแก้ว All Right Reserve!</p>
+        </footer>
     </body>
+     
 </html>
